@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$USER_HOME$/Downloads/DailyCode/DailyCode.iml" filepath="$USER_HOME$/Downloads/DailyCode/DailyCode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LibraryMngmnt.iml" filepath="$PROJECT_DIR$/LibraryMngmnt.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/TaxCalculatorVersion3-master (1)/TaxCalculatorVersion3-master/TaxCalculatorVersion3-master.iml" filepath="$USER_HOME$/Downloads/TaxCalculatorVersion3-master (1)/TaxCalculatorVersion3-master/TaxCalculatorVersion3-master.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,13 +1,19 @@
 package main.java.com.innovect.assignment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Library implements LibraryManagment {
+
+    Book currentBook;
     List<BooksInventory> bookList = new ArrayList<>();
+    Map<String, List<Book>> issuedBooks = new HashMap<>();
     static Library library = null;
 
     private Library() {
+
     }
 
     public static Library getInstance() {
@@ -32,15 +38,12 @@ public class Library implements LibraryManagment {
 
     private BooksInventory isExist(Book newItem) {
         for (BooksInventory item : bookList) {
-            if (item.getBooks().getTitle().equals(newItem.getTitle())) {
+            if (item.getBook().getTitle().equals(newItem.getTitle())) {
                 return item;
             }
         }
         return null;
     }
-
-
-
 
 
     @Override
@@ -57,7 +60,8 @@ public class Library implements LibraryManagment {
     public BooksInventory searchByTitle(String title) {
         for (int i = 0; i < bookList.size(); i++) {
             BooksInventory book = bookList.get(i);
-            if (book.getBooks().getTitle().equals(title)) {
+            if (book.getBook().getTitle().equals(title)) {
+                currentBook = book.getBook();
                 return book;
             }
         }
@@ -68,7 +72,7 @@ public class Library implements LibraryManagment {
     public List<BooksInventory> searchByAuthor(String author) {
         List<BooksInventory> searchedBooks = new ArrayList<>();
         for (BooksInventory book : bookList) {
-            List<Author> authorList = book.getBooks().getAuthors();
+            List<Author> authorList = book.getBook().getAuthors();
             for (Author author1 : authorList) {
                 if (author1.getAuthorName().equals(author)) {
                     searchedBooks.add(book);
@@ -80,8 +84,30 @@ public class Library implements LibraryManagment {
     }
 
     @Override
-    public Book issueBook() {
-        return null;
+    public Book issueBook(String userName) {
+        boolean isUserPresent = issuedBooks.containsKey(userName);
+        ArrayList<Book> newList = null;
+        if (isUserPresent) {
+            List<Book> usersBook = issuedBooks.get(userName);
+            usersBook.add(currentBook);
+        } else {
+            newList = new ArrayList<>();
+            newList.add(currentBook);
+            issuedBooks.put(userName,newList);
+        }
+
+        decreaseBookQuatity();
+
+        return currentBook;
+
+    }
+
+    private void decreaseBookQuatity() {
+        for (BooksInventory booksInventory : bookList) {
+            if (currentBook == booksInventory.getBook()) {
+                booksInventory.setQuantity(booksInventory.getQuantity() - 1);
+            }
+        }
     }
 
     @Override
@@ -90,14 +116,19 @@ public class Library implements LibraryManagment {
     }
 
     @Override
-    public List<BooksInventory> seachByCategory(String category) {
+    public List<BooksInventory> searchByCategory(String category) {
         List<BooksInventory> searchedBooks = new ArrayList<>();
         for (BooksInventory book : bookList) {
-            if (book.getBooks().getCategory().equals(category)) {
+            if (book.getBook().getCategory().equals(category)) {
                 searchedBooks.add(book);
             }
         }
         return searchedBooks;
+    }
+
+    @Override
+    public Map<String, List<Book>> viewIssuedBooks() {
+     return   issuedBooks;
     }
 
 

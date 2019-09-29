@@ -3,7 +3,7 @@ package main.java.com.innovect.assignment;
 
 public class Author {
 
-    String authorName;
+    private String authorName;
 
     public Author(String name) {
         authorName=name;

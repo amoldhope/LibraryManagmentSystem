@@ -3,7 +3,6 @@ package main.java.com.innovect.assignment;
 import java.util.List;
 
 public class Book {
-    private String ISBN;
     private String title;
     private String language;
     private List<Author> authors;
@@ -20,9 +19,6 @@ public class Book {
         this.category=category;
     }
 
-    public String getISBN() {
-        return ISBN;
-    }
 
     public String getTitle() {
         return title;

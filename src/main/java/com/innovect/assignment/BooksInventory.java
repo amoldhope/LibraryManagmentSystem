@@ -10,7 +10,7 @@ public class BooksInventory {
         this.quantity = quantity;
     }
 
-    public Book getBooks() {
+    public Book getBook() {
         return books;
     }
 
